@@ -1,0 +1,30 @@
+{
+  "name": "omniconnect",
+  "version": "1.0.0",
+  "description": "Random video chat application with WebRTC",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix server && npm install --prefix client",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "build:client": "npm run build --prefix client",
+    "start:server": "npm start --prefix server",
+    "docker:up": "docker-compose up --build",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "keywords": [
+    "webrtc",
+    "video-chat",
+    "random-chat",
+    "peer-to-peer",
+    "websocket",
+    "react"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
