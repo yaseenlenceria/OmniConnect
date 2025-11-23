@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Signaling Server
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - omniconnect-network
+
+  # Client (Frontend)
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      args:
+        - VITE_SIGNALING_SERVER=ws://localhost:3001
+    ports:
+      - "3000:80"
+    depends_on:
+      - server
+    restart: unless-stopped
+    networks:
+      - omniconnect-network
+
+networks:
+  omniconnect-network:
+    driver: bridge
